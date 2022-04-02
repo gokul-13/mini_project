@@ -10,6 +10,7 @@ const morgan=require('morgan')
 let app=express();
 app.use(bodyParser.json());
 app.use(morgan('combined'));
+app.use(cors());
 
 const studentApi=(require('./StudentAPI.js'));
 const courseApi=(require('./CourseAPI.js'));

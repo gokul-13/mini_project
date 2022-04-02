@@ -8,6 +8,9 @@ const router= express.Router();
 
 
 
+
+
+
 router.get('/',(req,res)=>{
     try {
          redisClient.exists("student").then(async (val)=>{
@@ -15,7 +18,7 @@ router.get('/',(req,res)=>{
                  console.log("Cache Hit");
                  await redisClient.get('student').then(async (value)=>{
                      res.header('Access-Control-Allow-Origin','*');
-                     res.json(JSON.parse(value));
+                     res.json({student:JSON.parse(value)});
                  });
              }
              else {
@@ -24,7 +27,7 @@ router.get('/',(req,res)=>{
                  await redisClient.setEx('student',60,JSON.stringify(records.rows));
                  await redisClient.get('student').then((value)=>{
                     res.header('Access-Control-Allow-Origin','*');
-                    res.json(JSON.parse(value));
+                    res.json({student:JSON.parse(value)});
                  });
              }
          });
@@ -49,10 +52,14 @@ router.post('/add',async (req,res)=>{
     try {
         const obj=req.body;
         console.log(obj);
-    const ret=await conn.query('INSERT INTO student(name,email) VALUES($1,$2)',[obj.name,obj.email]);
-    res.json(ret);
+    const ret=await conn.query('INSERT INTO student(id,name,email) VALUES($1,$2,$3)',[obj.id,obj.name,obj.email]);
+    res.header('Access-Control-Allow-Origin','*')
+    res.json({status:'success'});
     } catch (error) {
         console.log(error);
+        res.header('Access-Control-Allow-Origin','*')
+        res.json({status:'failure'});
+
     }
 });
 

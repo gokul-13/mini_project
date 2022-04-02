@@ -1,7 +1,7 @@
 <template>
-  <div>
-      <label>{{llabel}}</label>
-      <input :name="llabel"  type='text' :placeholder='llabel' v-model='name'>
+  <div class='form__group'>
+      <label class='form__label'>{{llabel}}</label>
+      <input :name="llabel" class='form__filed' type='text' :placeholder='llabel' v-model='name'>
   </div>
 </template>
 

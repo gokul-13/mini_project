@@ -2,12 +2,15 @@
   <div >
     <h1>Welcome!!  What do you want to do??</h1>
     <button @click='addStudent'>Add a student</button>
-
+    <button @click='getList'>Get the Students List</button>
+    <button @click='addCourse'>Add a Course</button>
+    <button @click='$router.push("addmarks");'>Add Marks</button>
   </div>
 </template>
 
 <script>
-//const router=require('../router/index');
+ 
+ import router from '../router/index'
 export default {
   name: 'HomeView',
   components: {},
@@ -16,7 +19,16 @@ export default {
           console.log("Called");
           this.$router.push({name:'addStudent'});
           
+      },
+       getList() {
+        console.log('Student List called');
+          router.push({name:'getlist'});
+       
+      },
+      addCourse() {
+        this.$router.push({name:'addcourse'});
       }
+
   }
 }
 </script>
