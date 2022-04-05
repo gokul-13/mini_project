@@ -12,6 +12,11 @@ app.use(bodyParser.json());
 app.use(morgan('combined'));
 app.use(cors());
 
+app.use((req,res,next)=>{
+    res.header('Access-Control-Allow-Origin','*');
+    next();
+})
+
 const studentApi=(require('./StudentAPI.js'));
 const courseApi=(require('./CourseAPI.js'));
 const markApi=require('./MarkAPI.js');

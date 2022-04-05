@@ -10,7 +10,7 @@ const amqp=require('amqplib');
 app.get('/',async (req,res)=>{
     await amqp.connect('amqp://localhost:5672').then(async (val)=>{
         await val.createChannel().then(async (channel)=>{
-            const queue='start';
+            const queue='student';
             const msg='Hello world';
             channel.assertQueue(queue,{durable:false});
             channel.sendToQueue(queue,Buffer.from(msg));

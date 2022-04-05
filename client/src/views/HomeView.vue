@@ -5,13 +5,40 @@
     <button @click='getList'>Get the Students List</button>
     <button @click='addCourse'>Add a Course</button>
     <button @click='$router.push("addmarks");'>Add Marks</button>
+    <button @click='$router.push("viewstudent");'>View Student</button>
+
+    <div>
+       <h2>Courses We Offer</h2>
+       <table id="student">
+
+         <tr>
+           <th> Course Id</th>
+           <th> Course Name</th>
+       </tr>
+       <tr v-for='record in courses' :key="record.name">
+           <td v-for='(field) in record' :key='field.name'>
+              {{field}}
+           </td>
+       </tr>
+
+
+
+
+       </table>
+       
+    </div>
   </div>
 </template>
 
 <script>
- 
+ import axios from 'axios';
  import router from '../router/index'
 export default {
+  data() {
+    return {
+      courses:[]
+    }
+  },
   name: 'HomeView',
   components: {},
   methods: {
@@ -29,17 +56,26 @@ export default {
         this.$router.push({name:'addcourse'});
       }
 
+  },
+  created() {
+      axios.get('http://localhost:8068/course/all').then((res)=>{
+        this.courses=res.data;
+        console.log(res);
+      })
   }
 }
 </script>
 
 <style>
 
+#student tr:hover {background-color: rgb(232, 195, 227);}
+
 button {
  
-  background-color: #4CAF50; /* Green */
+  background-color: #af65eb; /* Green */
   border: none;
   color: white;
+  margin:20px;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;

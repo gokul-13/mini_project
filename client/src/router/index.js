@@ -4,6 +4,9 @@ import AddStudent from '../views/AddStudent'
 import StudentList from '../views/StudentList'
 import AddCourse from '../views/AddCourse'
 import AddMarks from '../views/AddMarks'
+import ViewStudent from '../views/ViewStudent'
+import SignUp from '../views/SignUp'
+import Login from '../views/Login'
 
 const routes = [
   {
@@ -22,7 +25,7 @@ const routes = [
     component: AddStudent
   },
   {
-    path:'/getlist/',
+    path:'/getlist',
     name:'getlist',
     component:StudentList,
     props:true
@@ -38,6 +41,21 @@ const routes = [
     name:'addmarks',
     component:AddMarks
 
+  },
+  {
+    path:'/viewstudent',
+    name:'viewstudent',
+    component:ViewStudent
+  },
+  {
+    path:'/signup',
+    name:'signup',
+    component:SignUp
+  },
+  {
+    path:'/login',
+    name:'login',
+    component:Login
   }
 ]
 
