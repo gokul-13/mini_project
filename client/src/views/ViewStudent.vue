@@ -49,7 +49,14 @@ export default {
                         this.show=true;
                 }
             }
-        }
+        },
+         async created() {
+           const res= await axios.get('http://localhost:8068/check')
+            console.log(res.data);
+           if(res.data.status==='redirect') {
+                this.$router.replace('/login');
+           }
+      },
 }
 </script>
 

@@ -1,6 +1,7 @@
 
 <template>
     <div>
+         
             <h2 v-show='success' style="color:green">Student Successfully Added</h2>
              <TextBox llabel='Register Number' :action='action' v-on:printDetails='student.id=$event;this.action="old"'></TextBox>
             <TextBox llabel='Name' :action='action' v-on:printDetails='student.name=$event;this.action="old"'></TextBox>
@@ -13,7 +14,9 @@
 <script>
 import TextBox from '../components/TextBox.vue';
 const validate = require('../validation');
-import axios from 'axios'
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 export default {
         data() {
             return {
@@ -52,7 +55,14 @@ export default {
                    else {alert('User Already exists');}
                })
             }
-        }
+        },
+        async created() {
+           const res= await axios.get('http://localhost:8068/check')
+            console.log(res.data);
+           if(res.data.status==='redirect') {
+                this.$router.replace('/login');
+           }
+      },
 }
 </script>
 

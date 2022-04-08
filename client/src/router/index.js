@@ -7,10 +7,19 @@ import AddMarks from '../views/AddMarks'
 import ViewStudent from '../views/ViewStudent'
 import SignUp from '../views/SignUp'
 import Login from '../views/Login'
+import StudentPage from '../views/StudentPage'
+import Screen from '../views/Screen'
 
 const routes = [
+
   {
-    path: '/',
+    path: '/screen',
+    name: 'screen',
+    component: Screen
+  },
+
+  {
+    path: '/home',
     name: 'home',
     component: HomeView
   },
@@ -56,6 +65,11 @@ const routes = [
     path:'/login',
     name:'login',
     component:Login
+  },
+  {
+    path:'/student/login',
+    name:'student',
+    component:StudentPage
   }
 ]
 

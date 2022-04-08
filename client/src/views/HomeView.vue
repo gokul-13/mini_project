@@ -1,5 +1,6 @@
 <template>
   <div >
+     <button  @click="logout" >Logout</button>
     <h1>Welcome!!  What do you want to do??</h1>
     <button @click='addStudent'>Add a student</button>
     <button @click='getList'>Get the Students List</button>
@@ -32,6 +33,7 @@
 
 <script>
  import axios from 'axios';
+ axios.defaults.withCredentials = true;
  import router from '../router/index'
 export default {
   data() {
@@ -54,11 +56,18 @@ export default {
       },
       addCourse() {
         this.$router.push({name:'addcourse'});
-      }
+      },
+      async logout() {
+        const results=await axios.get('http://localhost:8068/logout');
+        this.$router.push('/screen');
+    }
 
   },
   created() {
       axios.get('http://localhost:8068/course/all').then((res)=>{
+        if(res.data.status==='redirect') {
+          this.$router.replace('login');
+        }
         this.courses=res.data;
         console.log(res);
       })

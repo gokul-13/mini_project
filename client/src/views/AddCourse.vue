@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div>    
+        
             <h2 v-show="success" style="color:green">Course Successfully Added</h2>
              <TextBox llabel='Course id' :action='action' v-on:printDetails='course.cid=$event;this.action="old"'></TextBox>
             <TextBox llabel='Course name' :action='action' v-on:printDetails='course.cname=$event;this.action="old";sendData()'></TextBox>
@@ -10,11 +11,15 @@
 </template>
 
 <script>
+
 import TextBox from '../components/TextBox';
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 const validate=require('../validation');
 export default {
+    
     data() {
+        
         return {
             action:'old',
             error_message:'',
@@ -44,7 +49,14 @@ export default {
                 alert("Add Failed");
             }
         }
-    }
+    },
+    async created() {
+           const res= await axios.get('http://localhost:8068/check')
+            console.log(res.data);
+           if(res.data.status==='redirect') {
+                this.$router.replace('/login');
+           }
+      },
 }
 </script>
 

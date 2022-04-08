@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav>
-    <router-link to="/">Home</router-link> |
+    <router-link to="/home">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
   <div class="page_block">
@@ -15,6 +15,18 @@
   <router-view/>
 </div>
 </template>
+
+<script>
+import axios from 'axios';
+axios.defaults.withCredentials=true;
+export default {
+  methods:{
+      
+  }
+}
+</script>
+
+
 
 <style>
 

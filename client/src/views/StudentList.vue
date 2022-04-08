@@ -28,6 +28,9 @@ export default {
      async created() {
            const res= await axios.get('http://localhost:8068/student/')
           console.log(res.data);
+           if(res.data.status==='redirect') {
+                this.$router.replace('/login');
+           }
            this.student_data=res.data.student;
       },
       methods: {
@@ -37,6 +40,7 @@ export default {
               console.log("Delete Confirmed");
               const result=await axios.delete(`http://localhost:8068/student/delete/${id}`);
               console.log(result);
+             
               if(result.data.status==='success') {
                 alert("Succesfully Deleted");
                 this.$router.go();
